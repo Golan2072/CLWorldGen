@@ -6,6 +6,9 @@ Requires requires OpenPyXl
 
 Version History
 
+v0.5.5 March 7th, 2020
+- FixEd a bug with TLs being resetted on inhospitable worlds.
+
 v0.5 March 7th, 2020
 - Program now includes a function to save to an Excel file (requires OpenPyXl)
 
