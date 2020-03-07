@@ -1,6 +1,6 @@
 # worldgenlib.py
 # Library file for the Cepheus Light World Generator by Omer Golan-Joel
-# v0.5 - March 7th, 2020
+# v0.5.5 - March 7th, 2020
 # This is open source code, feel free to use it for any purpose
 # For any questions, contact me at golan2072@gmail.com
 
@@ -134,13 +134,13 @@ def tech_gen(uwp_dict):
         tech += 2
     elif uwp_dict["government"] in [13, 14]:
         tech -= 2
-    if uwp_dict["hydrographics"] in [0, 10] and uwp_dict["population"] >= 6 and uwp_dict["tl"] < 4:
+    if uwp_dict["hydrographics"] in [0, 10] and uwp_dict["population"] >= 6 and tech < 4:
         tech = 4
-    if uwp_dict["atmosphere"] in [4, 7, 9] and tech < 5:
+    elif uwp_dict["atmosphere"] in [4, 7, 9] and tech < 5:
         tech = 5
-    elif uwp_dict["atmosphere"] in [0, 1, 2, 3, 10, 11, 12] and uwp_dict["tl"] < 7:
+    elif uwp_dict["atmosphere"] in [0, 1, 2, 3, 10, 11, 12] and tech < 7:
         tech = 7
-    if uwp_dict["atmosphere"] in [13, 14] and uwp_dict["hydrographics"] == 10 and uwp_dict["tl"] < 7:
+    elif uwp_dict["atmosphere"] in [13, 14] and uwp_dict["hydrographics"] == 10 and tech < 7:
         tech = 7
     if tech < 0:
         tech = 0
