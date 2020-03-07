@@ -1,6 +1,6 @@
 # stellagama.py
 # A module with various useful functions by Omer Golan-Joel
-# v3.1 - March 6th, 2020
+# v3.2 - March 7th, 2020
 # This is open source code, feel free to use it for any purpose
 # contact me at golan2072@gmail.com
 
@@ -12,14 +12,14 @@ import platform
 
 # functions
 def yn():
-    query = 1
-    while query == 1:
+    query = True
+    while query:
         answer = input("Y/N: ")
         if answer.lower() == "y":
-            return "yes"
+            return True
             break
         if answer.lower() == "n":
-            return "no"
+            return False
             break
         else:
             print("Invalid Answer")
@@ -59,16 +59,15 @@ def check_file_exists(check_file):
 
 
 def savefile(extension):
-    filename = str(input("Please enter file name to generate: "))
+    filename = str(input("Please enter file name to save: "))
     filecheck = filename + "." + extension
-    save = 1
     if check_file_exists(filecheck):
         print(" ")
         print("File already exists. Overwrite?")
         overwrite = yn()
-        if overwrite == "y":
-            save = 0
-        if overwrite == "n":
+        if overwrite:
+            pass
+        if not overwrite:
             filename = input("Please enter new file name to generate: ")
     filename = filename + "." + extension
     return filename
