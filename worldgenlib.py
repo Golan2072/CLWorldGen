@@ -1,6 +1,6 @@
 # worldgenlib.py
 # Library file for the Cepheus Light World Generator by Omer Golan-Joel
-# v0.1 - March 7th, 2020
+# v0.5 - March 7th, 2020
 # This is open source code, feel free to use it for any purpose
 # For any questions, contact me at golan2072@gmail.com
 
@@ -287,7 +287,7 @@ class World:
 
     def get_uwp_string(self):
         return (
-            f"{self.hex_uwp['starport']}{self.hex_uwp['size']}{self.hex_uwp['atmosphere']}{self.hex_uwp['hydrographics']}{self.hex_uwp['population']}{self.hex_uwp['government']}{self.hex_uwp['law']}-{self.hex_uwp['tl']} {self.base}   {self.zone}   {self.gas_giants}   {self.trade_string}  ")
+            f"{self.hex_uwp['starport']}{self.hex_uwp['size']}{self.hex_uwp['atmosphere']}{self.hex_uwp['hydrographics']}{self.hex_uwp['population']}{self.hex_uwp['government']}{self.hex_uwp['law']}-{self.hex_uwp['tl']}")
 
 
 # Test area
