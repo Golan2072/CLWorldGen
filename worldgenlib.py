@@ -1,12 +1,11 @@
 # worldgenlib.py
 # Library file for the Cepheus Light World Generator by Omer Golan-Joel
-# v0.01 - March 6th, 2020
+# v0.1 - March 7th, 2020
 # This is open source code, feel free to use it for any purpose
-# contact me at golan2072@gmail.com
+# For any questions, contact me at golan2072@gmail.com
 
 # Import modules
 import stellagama
-import random
 
 
 # Functions
@@ -18,6 +17,8 @@ def atmo_gen(size):
         atmosphere = stellagama.dice(2, 6) - 7 + size
     if atmosphere > 15:
         atmosphere = 15
+    if atmosphere < 0:
+        atmosphere = 0
     return atmosphere
 
 
@@ -275,17 +276,18 @@ class World:
         self.trade_list = trade_gen(self.uwp_dict)
         self.trade_string = " ".join(self.trade_list)
 
-    def get_raw_uwp(self):
+    def print_raw_uwp(self):
         print(self.uwp_dict["starport"], self.uwp_dict["size"], self.uwp_dict["atmosphere"],
               self.uwp_dict["hydrographics"], self.uwp_dict["population"], self.uwp_dict["government"],
               self.uwp_dict["law"], "-", self.uwp_dict["tl"])
 
-    def get_uwp(self):
+    def print_uwp(self):
         print(
+            f"{self.hex_uwp['starport']}{self.hex_uwp['size']}{self.hex_uwp['atmosphere']}{self.hex_uwp['hydrographics']}{self.hex_uwp['population']}{self.hex_uwp['government']}{self.hex_uwp['law']}-{self.hex_uwp['tl']} {self.base}   {self.zone}   {self.gas_giants}   {self.trade_string}  ")
+
+    def get_uwp_string(self):
+        return (
             f"{self.hex_uwp['starport']}{self.hex_uwp['size']}{self.hex_uwp['atmosphere']}{self.hex_uwp['hydrographics']}{self.hex_uwp['population']}{self.hex_uwp['government']}{self.hex_uwp['law']}-{self.hex_uwp['tl']} {self.base}   {self.zone}   {self.gas_giants}   {self.trade_string}  ")
 
 
 # Test area
-for i in range(1, 501):
-    world = World()
-    world.get_uwp()
