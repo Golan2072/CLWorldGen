@@ -6,8 +6,11 @@ Requires requires OpenPyXl
 
 Version History
 
+v0.6 March 15th, 2020
+- Program now saves each UWP digit in a separate Excel column.
+
 v0.5.5 March 7th, 2020
-- FixEd a bug with TLs being resetted on inhospitable worlds.
+- Fixed a bug with TLs being resetted on inhospitable worlds.
 
 v0.5 March 7th, 2020
 - Program now includes a function to save to an Excel file (requires OpenPyXl)
