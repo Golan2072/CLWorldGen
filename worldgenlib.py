@@ -1,6 +1,6 @@
 # worldgenlib.py
 # Library file for the Cepheus Light World Generator by Omer Golan-Joel
-# v0.5.5 - March 7th, 2020
+# v0.6 - March 15th, 2020
 # This is open source code, feel free to use it for any purpose
 # For any questions, contact me at golan2072@gmail.com
 
