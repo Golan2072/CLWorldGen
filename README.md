@@ -1,4 +1,4 @@
-# CLWoldGen
+# CLWorldGen
 Cepheus Light World Generator by Omer Golan-Joel
 This is open source code, feel free to use it for any purpose
 For any questions, contact me at golan2072@gmail.com
