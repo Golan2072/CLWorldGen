@@ -6,6 +6,9 @@ Requires requires OpenPyXl
 
 Version History
 
+v0.7 February 11th, 2021
+- Program now generates a JSON file containing a dictionary of worlds.
+
 v0.6 March 15th, 2020
 - Program now saves each UWP digit in a separate Excel column.
 
