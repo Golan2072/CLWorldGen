@@ -1,6 +1,5 @@
 # worldgenlib.py
 # Library file for the Cepheus Light World Generator by Omer Golan-Joel
-# v0.7 - February 11th, 2021
 # This is open source code, feel free to use it for any purpose
 # For any questions, contact me at golan2072@gmail.com
 
@@ -167,18 +166,38 @@ def zone_gen(uwp_dict):
         return " "
 
 
-def gas_gen():
-    if stellagama.dice(2, 6) >= 5:
-        return "G"
+def pbg_gen(pop):
+    pbg = [0,0,0]
+    if pop == 0:
+        pbg[0] = 0
     else:
-        return " "
+        pbg[0] = stellagama.dice (2, 6) -2
+        if pbg[0] < 1:
+            pbg[0] = 1
+        elif pbg[0] > 9:
+            pbg[0] = 9
+    if stellagama.dice(2, 6) >= 4:
+        pbg[1] = stellagama.dice(1,6) -3
+        if pbg[1] < 1:
+            pbg[1] = 1
+    else:
+        pbg[1] = 0
+    if stellagama.dice(2, 6) >= 5:
+        pbg[2] = stellagama.dice(1,6) - 2
+        if pbg[2] < 1:
+            pbg[2] = 1
+    else:
+        pbg[2] = 0
+    for item in range (0, 3):
+        pbg[item] = str(pbg[item])
+    return "".join(pbg)
 
 
 def base_gen(starport):
     naval = False
     scout = False
     pirate = False
-    if starport in ["A", "B"] and stellagama.dice(2, 6) >=8:
+    if starport in ["A", "B"] and stellagama.dice(2, 6) >= 8:
         naval = True
     if starport in ["A", "B", "C", "D"]:
         scout_presence = stellagama.dice(2, 6)
@@ -210,7 +229,8 @@ def base_gen(starport):
 
 def trade_gen(uwp_dict):
     trade_list = []
-    if uwp_dict["atmosphere"] in range(4, 10) and uwp_dict["hydrographics"] in range(4, 9) and uwp_dict["population"] in range(5, 8):
+    if uwp_dict["atmosphere"] in range(4, 10) and uwp_dict["hydrographics"] in range(4, 9) and uwp_dict[
+        "population"] in range(5, 8):
         trade_list.append("Ag")
     if uwp_dict["size"] == 0:
         trade_list.append("As")
@@ -220,7 +240,8 @@ def trade_gen(uwp_dict):
         trade_list.append("De")
     if uwp_dict["atmosphere"] >= 10 and uwp_dict["hydrographics"] > 0:
         trade_list.append("Fl")
-    if uwp_dict["atmosphere"] in [5, 6, 8] and uwp_dict["hydrographics"] in range(4, 10) and uwp_dict["population"] in range(4, 9):
+    if uwp_dict["atmosphere"] in [5, 6, 8] and uwp_dict["hydrographics"] in range(4, 10) and uwp_dict[
+        "population"] in range(4, 9):
         trade_list.append("Ga")
     if uwp_dict["population"] >= 9:
         trade_list.append("Hi")
@@ -253,7 +274,9 @@ def trade_gen(uwp_dict):
 
 class World:
 
-    def __init__(self):
+    def __init__(self, hex):
+        self.name = "Placeholder"
+        self.hex = hex
         self.uwp_dict = {"starport": "X", "size": stellagama.dice(2, 6) - 2, "atmosphere": 0, "hydrographics": 0,
                          "population": 0, "government": 0, "law": 0, "tl": 0}
         self.uwp_dict["atmosphere"] = atmo_gen(self.uwp_dict["size"])
@@ -271,10 +294,11 @@ class World:
                         "law": stellagama.pseudo_hex(self.uwp_dict["law"]),
                         "tl": stellagama.pseudo_hex(self.uwp_dict["tl"])}
         self.zone = zone_gen(self.uwp_dict)
-        self.gas_giants = gas_gen()
+        self.pbg = pbg_gen(self.uwp_dict["population"])
         self.base = base_gen(self.uwp_dict["starport"])
         self.trade_list = trade_gen(self.uwp_dict)
         self.trade_string = " ".join(self.trade_list)
+        self.allegiance = "Na"
 
     def print_raw_uwp(self):
         print(self.uwp_dict["starport"], self.uwp_dict["size"], self.uwp_dict["atmosphere"],
@@ -289,5 +313,14 @@ class World:
         return (
             f"{self.hex_uwp['starport']}{self.hex_uwp['size']}{self.hex_uwp['atmosphere']}{self.hex_uwp['hydrographics']}{self.hex_uwp['population']}{self.hex_uwp['government']}{self.hex_uwp['law']}-{self.hex_uwp['tl']}")
 
+    # def get_world_row(self):
+    #     return (f"{self.name}\t\t{self.hex} {self.get_uwp_string()} {self.base} {self.trade_string}\t{self.allegiance}\t{self.pbg}")
+
+    def get_world_row(self):
+        world_list = [self.name, str(self.hex), self.get_uwp_string, self.base, self.trade_string, self.pbg]
+        uwp_string = self.get_uwp_string()
+        return (f"{self.name: <{20}}{self.hex: <{6}}{uwp_string: <{12}}{self.base: <{6}}{self.trade_string: <{20}}{self.pbg: <{6}}{self.allegiance: <{3}}")
 
 # Test area
+# test = World("0101")
+# print (test.get_world_row())
