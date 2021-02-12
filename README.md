@@ -6,6 +6,9 @@ Requires requires OpenPyXl
 
 Version History
 
+v0.8 Febryary 12th, 2021
+- Output is now in an experiental "Legacy SEC" format; not compatible yet with TravellerMap.
+
 v0.7 February 11th, 2021
 - Program now generates a JSON file containing a dictionary of worlds.
 
