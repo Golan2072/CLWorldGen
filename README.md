@@ -6,7 +6,11 @@ Requires requires OpenPyXl
 
 Version History
 
-v0.8 Febryary 12th, 2021
+v0.9 February 14th, 2021
+- Added world name placeholder file and selection mechanism.
+- Changed world generation format to fit T5 standards; still not compatible yet with TravellerMap.
+
+v0.8 February 12th, 2021
 - Output is now in an experiental "Legacy SEC" format; not compatible yet with TravellerMap.
 
 v0.7 February 11th, 2021
