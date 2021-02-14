@@ -15,8 +15,8 @@ import json
 def sector_generator(maxrow, maxcolumn):
     sector_name = stellagama.savefile("sec")
     output = open(sector_name, "w")
-    output.write(sector_name + '\r\n')
-    output.write(f"{'World': <{20}}{'Hex': <{6}}{'UWP': <{12}}{'Base': <{6}}{'Trade': <{20}}{'PBG': <{6}}{'Allegiance': <{3}}\r\n")
+    output.write(f"{'Hex': <{6}}{'Name': <{14}}{'UWP': <{10}}{'Remarks': <{28}}{'{Ix}': <{6}}{'{Ex}': <{8}}{'{Cx}': <{7}}{'N': <{2}}{'B': <{3}}{'Z': <{2}}{'PBG': <{4}}{'W': <{3}}{'A': <{3}}{'Stellar': <{23}}\n")
+    output.write("----  ------------  --------- --------------------------- ----- ------- ------ - -- - --- -- -- ----------------------\n")
     for column in range(1, maxcolumn + 1):
         for row in range(1, maxrow + 1):
             if stellagama.dice(1, 6) >= 4:
@@ -119,4 +119,4 @@ def sector_generator_json(maxrow, maxcolumn):
         json.dump(sector_dict, outfile)
 
 if __name__ == "__main__":
-    sector_generator(40, 32)
+    sector_generator(10, 8)

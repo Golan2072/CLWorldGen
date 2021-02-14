@@ -275,7 +275,7 @@ def trade_gen(uwp_dict):
 class World:
 
     def __init__(self, hex):
-        self.name = "Placeholder"
+        self.name = stellagama.random_line('data\worlds.txt')
         self.hex = hex
         self.uwp_dict = {"starport": "X", "size": stellagama.dice(2, 6) - 2, "atmosphere": 0, "hydrographics": 0,
                          "population": 0, "government": 0, "law": 0, "tl": 0}
@@ -299,6 +299,12 @@ class World:
         self.trade_list = trade_gen(self.uwp_dict)
         self.trade_string = " ".join(self.trade_list)
         self.allegiance = "Na"
+        self.ix = ""
+        self.ex = ""
+        self.cx = ""
+        self.noble = ""
+        self.w = ""
+        self.stellar = ""
 
     def print_raw_uwp(self):
         print(self.uwp_dict["starport"], self.uwp_dict["size"], self.uwp_dict["atmosphere"],
@@ -319,7 +325,7 @@ class World:
     def get_world_row(self):
         world_list = [self.name, str(self.hex), self.get_uwp_string, self.base, self.trade_string, self.pbg]
         uwp_string = self.get_uwp_string()
-        return (f"{self.name: <{20}}{self.hex: <{6}}{uwp_string: <{12}}{self.base: <{6}}{self.trade_string: <{20}}{self.pbg: <{6}}{self.allegiance: <{3}}")
+        return f"{self.hex: <{6}}{self.name: <{14}}{uwp_string: <{10}}{self.trade_string: <{28}}{self.ix: <{6}}{self.ex: <{8}}{self.cx: <{7}}{self.noble: <{2}}{self.base: <{3}}{self.zone: <{2}}{self.pbg: <{4}}{self.w: <{3}}{self.allegiance: <{3}}{self.stellar: <{23}}"
 
 # Test area
 # test = World("0101")
