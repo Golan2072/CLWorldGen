@@ -6,6 +6,10 @@ Requires requires OpenPyXl
 
 Version History
 
+v1.0, February 15th, 2021
+- Output now compatible with The Traveller Map's map generator:
+https://travellermap.com/make/poster
+
 v0.9 February 14th, 2021
 - Added world name placeholder file and selection mechanism.
 - Changed world generation format to fit T5 standards; still not compatible yet with TravellerMap.
