@@ -143,6 +143,8 @@ def tech_gen(uwp_dict):
         tech = 7
     if tech < 0:
         tech = 0
+    elif uwp_dict["population"] == 0:
+        tech = 0
     return tech
 
 
@@ -325,7 +327,7 @@ class World:
     def get_world_row(self):
         world_list = [self.name, str(self.hex), self.get_uwp_string, self.base, self.trade_string, self.pbg]
         uwp_string = self.get_uwp_string()
-        return f"{self.hex: <{6}}{self.name: <{14}}{uwp_string: <{10}}{self.trade_string: <{28}}{self.ix: <{6}}{self.ex: <{8}}{self.cx: <{7}}{self.noble: <{2}}{self.base: <{3}}{self.zone: <{2}}{self.pbg: <{4}}{self.w: <{3}}{self.allegiance: <{3}}{self.stellar: <{23}}"
+        return f"{self.hex: <{5}}{self.name: <{13}}{uwp_string: <{10}}{self.trade_string: <{28}}{self.ix: <{5}}{self.ex: <{8}}{self.cx: <{8}}{self.noble: <{2}}{self.base: <{3}}{self.zone: <{2}}{self.pbg: <{4}}{self.w: <{3}}{self.allegiance: <{3}}{self.stellar: <{22}}"
 
 # Test area
 # test = World("0101")
