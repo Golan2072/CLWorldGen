@@ -5,7 +5,7 @@
 
 # Import modules
 import stellagama
-
+import os
 
 # Functions
 
@@ -277,7 +277,7 @@ def trade_gen(uwp_dict):
 class World:
 
     def __init__(self, hex):
-        self.name = stellagama.random_line('data\worlds.txt')
+        self.name = stellagama.random_line(os.path.join('data','worlds.txt'))
         self.hex = hex
         self.uwp_dict = {"starport": "X", "size": stellagama.dice(2, 6) - 2, "atmosphere": 0, "hydrographics": 0,
                          "population": 0, "government": 0, "law": 0, "tl": 0}
