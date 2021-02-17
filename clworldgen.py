@@ -9,6 +9,7 @@ import worldgenlib
 import openpyxl
 from openpyxl.styles import Font
 import json
+import csv
 
 
 # Functions
@@ -97,8 +98,8 @@ def sector_generator_excel(maxrow, maxcolumn):
 def sector_generator_json(maxrow, maxcolumn):
     sector_name = stellagama.savefile("json")
     sector_dict = {}
-    sector_dict["sector_name"] = sector_name[:-5]
     for column in range(1, maxcolumn + 1):
+        sector_dict[column] = {}
         for row in range(1, maxrow + 1):
             if stellagama.dice(1, 6) >= 4:
                 if row <= 9:
@@ -110,13 +111,36 @@ def sector_generator_json(maxrow, maxcolumn):
                 elif column >= 10:
                     column_location = "%i" % column
                 world_hex = column_location + row_location
-                world = worldgenlib.World()
-                world_dict = {"hex": world_hex, "starport": world.hex_uwp["starport"], "size": world.hex_uwp["size"], "atmosphere": world.hex_uwp["atmosphere"], "hydrographics": world.hex_uwp["hydrographics"], "population": world.hex_uwp["population"], "government": world.hex_uwp["government"], "law": world.hex_uwp["law"], "tl": world.hex_uwp["tl"], "zone": world.zone, "base": world.base, "gas_giants": world.gas_giants, "trade": world.trade_string}
-                sector_dict[world_hex] = world_dict
+                world = worldgenlib.World(world_hex)
+                world_dict = {"hex": world_hex, "name": world.name, "starport": world.uwp_dict["starport"], "size": world.uwp_dict["size"], "atmosphere": world.uwp_dict["atmosphere"], "hydrographics": world.uwp_dict["hydrographics"], "population": world.uwp_dict["population"], "government": world.uwp_dict["government"], "law": world.uwp_dict["law"], "tl": world.uwp_dict["tl"], "zone": world.zone, "base": world.base, "gas_giants": world.gas_giant, "trade": world.trade_string}
+                sector_dict[column][row] = world_dict
             else:
                 pass
     with open(sector_name, 'w') as outfile:
         json.dump(sector_dict, outfile)
 
+
+def sector_generator_csv(maxrow, maxcolumn):
+    sector_name = stellagama.savefile("csv")
+    with open (sector_name, 'w') as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=',',lineterminator='\n',)
+        for column in range(1, maxcolumn + 1):
+            for row in range(1, maxrow + 1):
+                if stellagama.dice(1, 6) >= 4:
+                    if row <= 9:
+                        row_location = "0%i" % row
+                    elif row >= 10:
+                        row_location = "%i" % row
+                    if column <= 9:
+                        column_location = "0%i" % column
+                    elif column >= 10:
+                        column_location = "%i" % column
+                    world_hex = column_location + row_location
+                    world = worldgenlib.World(world_hex)
+                    world_list = [column_location, row_location, world.name, world.uwp_dict["starport"], world.uwp_dict["size"], world.uwp_dict["atmosphere"], world.uwp_dict["hydrographics"], world.uwp_dict["population"], world.uwp_dict["government"], world.uwp_dict["law"], world.uwp_dict["tl"], world.zone, world.base, world.gas_giant, world.trade_string]
+                    csvwriter.writerow(world_list)
+                else:
+                    pass
+
 if __name__ == "__main__":
-    sector_generator(10, 8)
+    sector_generator_json(10, 8)

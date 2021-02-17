@@ -297,6 +297,9 @@ class World:
                         "tl": stellagama.pseudo_hex(self.uwp_dict["tl"])}
         self.zone = zone_gen(self.uwp_dict)
         self.pbg = pbg_gen(self.uwp_dict["population"])
+        self.pbg_list = self.pbg.split()
+        if int(self.pbg_list[0]) > 0:
+            self.gas_giant = "G"
         self.base = base_gen(self.uwp_dict["starport"])
         self.trade_list = trade_gen(self.uwp_dict)
         self.trade_string = " ".join(self.trade_list)
