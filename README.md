@@ -6,6 +6,9 @@ Requires requires OpenPyXl
 
 Version History
 
+v1.1, February 17th, 2021
+- JSON file output of the world generation script now includes a world name.
+
 v1.0, February 15th, 2021
 - Output now compatible with The Traveller Map's map generator:
 https://travellermap.com/make/poster
